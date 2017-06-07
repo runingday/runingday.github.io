@@ -29,9 +29,9 @@ update email_report set email_report.subject=concat(email_report.name, "${data_d
 
 ### AND OR 优先级问题
 mysql> select vend_id, prod_name, prod_price from products where vend_id='DLL01' OR vend_id='BRS01';
-+---------+---------------------+------------+
++---------+---------------------+------------
 | vend_id | prod_name           | prod_price |
-+---------+---------------------+------------+
+---------+---------------------+------------+
 | DLL01   | Fish bean bag toy   |       3.49 |
 | DLL01   | Bird bean bag toy   |       3.49 |
 | DLL01   | Rabbit bean bag toy |       3.49 |
