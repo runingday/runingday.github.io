@@ -54,11 +54,11 @@ mysql> select vend_id, prod_name, prod_price from products where vend_id='DLL01'
 5 rows in set (0.00 sec)
 
 mysql> select vend_id, prod_name, prod_price from products where (vend_id='DLL01' OR vend_id='BRS01') and prod_price >= 10;
-+---------+--------------------+------------+
+
 | vend_id | prod_name          | prod_price |
-+---------+--------------------+------------+
+|---------|-------------------|------------|
 | BRS01   | 18 inch teddy bear |      11.99 |
-+---------+--------------------+------------+
+
 1 row in set (0.00 sec)
 
 mysql> select vend_id, prod_name, prod_price from products where (vend_id='DLL01' OR vend_id='BRS01') and prod_price >= 10;
