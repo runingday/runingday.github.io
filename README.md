@@ -29,9 +29,9 @@ update email_report set email_report.subject=concat(email_report.name, "${data_d
 
 ### AND OR 优先级问题
 mysql> select vend_id, prod_name, prod_price from products where vend_id='DLL01' OR vend_id='BRS01';
-+---------+---------------------+------------
+
 | vend_id | prod_name           | prod_price |
----------+---------------------+------------+
+| ------- | ------------------  | ---------- |
 | DLL01   | Fish bean bag toy   |       3.49 |
 | DLL01   | Bird bean bag toy   |       3.49 |
 | DLL01   | Rabbit bean bag toy |       3.49 |
@@ -39,19 +39,18 @@ mysql> select vend_id, prod_name, prod_price from products where vend_id='DLL01'
 | BRS01   | 12 inch teddy bear  |       8.99 |
 | BRS01   | 18 inch teddy bear  |      11.99 |
 | DLL01   | Raggedy Ann         |       4.99 |
-+---------+---------------------+------------+
+
 7 rows in set (0.00 sec)
 
 mysql> select vend_id, prod_name, prod_price from products where vend_id='DLL01' OR vend_id='BRS01' and prod_price >= 10;
-+---------+---------------------+------------+
+
 | vend_id | prod_name           | prod_price |
-+---------+---------------------+------------+
+|---------|---------------------|------------|
 | DLL01   | Fish bean bag toy   |       3.49 |
 | DLL01   | Bird bean bag toy   |       3.49 |
 | DLL01   | Rabbit bean bag toy |       3.49 |
 | BRS01   | 18 inch teddy bear  |      11.99 |
 | DLL01   | Raggedy Ann         |       4.99 |
-+---------+---------------------+------------+
 5 rows in set (0.00 sec)
 
 mysql> select vend_id, prod_name, prod_price from products where (vend_id='DLL01' OR vend_id='BRS01') and prod_price >= 10;
