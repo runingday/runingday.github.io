@@ -62,3 +62,26 @@ mysql> select vend_id, prod_name, prod_price from products where (vend_id='DLL01
 1 row in set (0.00 sec)
 
 mysql> select vend_id, prod_name, prod_price from products where (vend_id='DLL01' OR vend_id='BRS01') and prod_price >= 10;
+
+### SQL中使用正则匹配
+
+mysql> mysql> select cust_contact from customers where cust_contact REGEXP '^[JM].*$';
+
+| cust_contact   |
+| -------------  |
+| John Smith     |
+| Michelle Green |
+| Jim Jones      |
+
+3 rows in set (0.00 sec)
+
+mysql> select cust_contact from customers where cust_contact REGEXP '^[^JM].*$';
+
+| cust_contact       |
+|--------------------|
+| Denise L. Stephens |
+| Kim Howard         |
+
+2 rows in set (0.00 sec)
+
+
