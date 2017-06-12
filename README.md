@@ -84,4 +84,29 @@ mysql> select cust_contact from customers where cust_contact REGEXP '^[^JM].*$';
 
 2 rows in set (0.00 sec)
 
+### 字符串拼接
+mysql> select * from vendors;
 
+| vend_id | vend_name       | vend_address    | vend_city  | vend_state | vend_zip | vend_country |
+|--------- ---------------------------------------------------------------------------------------|
+| BRE02   | Bear Emporium   | 500 Park Street | Anytown    | OH         | 44333    | USA          |
+| BRS01   | Bears R Us      | 123 Main Street | Bear Town  | MI         | 44444    | USA          |
+| DLL01   | Doll House Inc. | 555 High Street | Dollsville | CA         | 99999    | USA          |
+| FNG01   | Fun and Games   | 42 Galaxy Road  | London     | NULL       | N16 6PS  | England      |
+| FRB01   | Furball Inc.    | 1000 5th Avenue | New York   | NY         | 11111    | USA          |
+| JTS01   | Jouets et ours  | 1 Rue Amusement | Paris      | NULL       | 45678    | France       |
+
+6 rows in set (0.00 sec)
+
+mysql> select concat (vend_name, ' (', vend_country, ')' ) from vendors;
+
+| concat (vend_name, ' (', vend_country, ')' ) |
+|----------------------------------------------|
+| Bear Emporium (USA)                          |
+| Bears R Us (USA)                             |
+| Doll House Inc. (USA)                        |
+| Fun and Games (England)                      |
+| Furball Inc. (USA)                           |
+| Jouets et ours (France)                      |
+
+6 rows in set (0.00 sec)
