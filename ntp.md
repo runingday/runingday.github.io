@@ -1,5 +1,6 @@
 ## 服务器端配置
-<code>
+
+<pre>
 # For more information about this file, see the man pages
 # ntp.conf(5), ntp_acc(5), ntp_auth(5), ntp_clock(5), ntp_misc(5), ntp_mon(5).
 driftfile /var/lib/ntp/drift
@@ -47,12 +48,12 @@ keys /etc/ntp/keys
 server 127.127.1.0  #配置服务端
 fudge 127.127.1.0 stratum 10
 # end
-</code>
+</pre>
 
 
 
 ## 客户端配置
-<code>
+<pre>
 # For more information about this file, see the man pages
 # ntp.conf(5), ntp_acc(5), ntp_auth(5), ntp_clock(5), ntp_misc(5), ntp_mon(5).
 driftfile /var/lib/ntp/drift
@@ -93,4 +94,4 @@ keys /etc/ntp/keys
 #statistics clockstats cryptostats loopstats peerstats
 # next few lines are added by sensors analytics installer at 2017-06-08 10:18:34.680091
 # end
-</code>
+</pre>
