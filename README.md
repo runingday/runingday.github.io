@@ -56,7 +56,7 @@ mysql> select vend_id, prod_name, prod_price from products where vend_id='DLL01'
 mysql> select vend_id, prod_name, prod_price from products where (vend_id='DLL01' OR vend_id='BRS01') and prod_price >= 10;
 
 | vend_id | prod_name          | prod_price |
-|---------|-------------------|------------|
+|---------|---------------------|----------|
 | BRS01   | 18 inch teddy bear |      11.99 |
 
 1 row in set (0.00 sec)
@@ -88,7 +88,7 @@ mysql> select cust_contact from customers where cust_contact REGEXP '^[^JM].*$';
 mysql> select * from vendors;
 
 | vend_id | vend_name       | vend_address    | vend_city  | vend_state | vend_zip | vend_country |
-|--------- ---------------------------------------------------------------------------------------|
+|--------- | ----------------| ---------------| ------------| ------------| ------------| ---------|
 | BRE02   | Bear Emporium   | 500 Park Street | Anytown    | OH         | 44333    | USA          |
 | BRS01   | Bears R Us      | 123 Main Street | Bear Town  | MI         | 44444    | USA          |
 | DLL01   | Doll House Inc. | 555 High Street | Dollsville | CA         | 99999    | USA          |
