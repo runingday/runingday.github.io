@@ -1,7 +1,8 @@
 ## mysql group by 使用
 mysql> select * from products;
+
 | prod_id | vend_id | prod_name           | prod_price | prod_desc |                                              
-|---------|---------|---------------------|------------|---------------------------------|
+|---------|---------|---------------------|------------|-----------|
 | BNBG01  | DLL01   | Fish bean bag toy   |       3.49 | Fish bean bag toy, complete with bean bag worms with |
 | BNBG02  | DLL01   | Bird bean bag toy   |       3.49 | Bird bean bag toy, eggs are not included    |             
 | BNBG03  | DLL01   | Rabbit bean bag toy |       3.49 | Rabbit bean bag toy, comes with bean bag carrots   | 
