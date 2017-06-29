@@ -14,3 +14,19 @@ mysql> select * from products;
 | RYL02   | FNG01   | Queen doll          |       9.49 | 12 inch queen doll with royal garments and crown  |
 
 9 rows in set (0.00 sec)
+
+mysql> select vend_id, count(*) as num_prods from products where prod_price >= 4 group by vend_id;
+| vend_id | num_prods |
+|---------|-----------|
+| BRS01   |         3 |
+| DLL01   |         1 |
+| FNG01   |         2 |
+3 rows in set (0.00 sec)
+
+mysql> select vend_id, count(*) as num_prods from products where prod_price >= 4 group by vend_id having count(*) >= 2;
+| vend_id | num_prods |
+|---------|-----------|
+| BRS01   |         3 |
+| FNG01   |         2 |
+
+2 rows in set (0.00 sec)
