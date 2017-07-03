@@ -46,6 +46,7 @@ mysql> select vend_id, count(*) as num_prods from products group by vend_id havi
 3 rows in set (0.00 sec)
 
 mysql> select * from orderitems;
+
 | order_num | order_item | prod_id | quantity | item_price |
 |-----------|------------|---------|----------|------------|
 |     20005 |          1 | BR01    |      100 |       5.49 |
@@ -68,6 +69,7 @@ mysql> select * from orderitems;
 |     20009 |          3 | BNBG03  |      250 |       2.49 |
 
 mysql> select order_num, count(*) as items from orderitems group by order_num;
+
 | order_num | items |
 |-----------|-------|
 |     20005 |     2 |
@@ -78,6 +80,7 @@ mysql> select order_num, count(*) as items from orderitems group by order_num;
 5 rows in set (0.00 sec)
 
 mysql> select order_num, count(*) as items from orderitems group by order_num having count(*) > 3;
+
 | order_num | items |
 |-----------|-------|
 |     20007 |     5 |
@@ -85,6 +88,7 @@ mysql> select order_num, count(*) as items from orderitems group by order_num ha
 2 rows in set (0.00 sec)
 
 mysql> select order_num, count(*) as items from orderitems group by order_num having count(*) >= 3 order by items, order_num;
+
 | order_num | items |
 |-----------|-------|
 |     20006 |     3 |
