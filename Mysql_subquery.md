@@ -55,3 +55,34 @@ Now suppose you wanted a list of all customers who ordered item RGAN01. What wou
 2. Retrieve the customer ID of all the customers who have orders listed in the order numbers returned in the previous step. 
 3. Retrieve the customer information for all the customer IDs returned in the previous step. 
 </pre>
+
+## 1. Retrieve the order numbers of all orders containing item RGAN01.
+
+mysql> select order_num from orderItems where prod_id='RGAN01';
+
+| order_num |
+|-----------|
+|     20007 |
+|     20008 |
+
+2 rows in set (0.00 sec)
+
+## 2. 
+mysql> select cust_id from orders where order_num in (20007, 20008);
+
+| cust_id    |
+|------------|
+| 1000000004 |
+| 1000000005 |
+
+2 rows in set (0.00 sec)
+
+## 3. 
+mysql> select cust_name, cust_contact from customers where cust_id in (1000000004,1000000005);
+
+| cust_name     | cust_contact       |
+|---------------|--------------------|
+| Fun4All       | Denise L. Stephens |
+| The Toy Store | Kim Howard         |
+
+2 rows in set (0.01 sec)
