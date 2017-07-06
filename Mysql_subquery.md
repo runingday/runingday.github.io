@@ -86,10 +86,7 @@ mysql> select cust_name, cust_contact from customers where cust_id in (100000000
 | The Toy Store | Kim Howard         |
 
 2 rows in set (0.01 sec)
-mysql> select cust_name, cust_contact from customers where cust_id in (
-    -> select cust_id from orders where order_num in (
-    -> select order_num from orderItems where prod_id='RGAN01')
-    -> );
+mysql> select cust_name, cust_contact from customers where cust_id in (select cust_id from orders where order_num in (select order_num from orderItems where prod_id='RGAN01'));
 
 | cust_name     | cust_contact       |
 |---------------|--------------------|
