@@ -9,7 +9,7 @@
 【性能分析工具】
 
 首先来看一张图：
-
+![Alt text](/images/E616F6DE-61DA-492A-9EA5-0B50CE141FE7.png?raw=true "Optional Title")
 上图是Brendan Gregg 的一次性能分析的分享，这里面的所有工具都可以通过man来获得它的帮助文档，下问简单介绍介绍一下常规的用法：
 
 ▲ vmstat--虚拟内存统计
