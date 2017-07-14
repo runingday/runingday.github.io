@@ -18,6 +18,7 @@ vmstat(VirtualMeomoryStatistics,虚拟内存统计) 是Linux中监控内存的�
 vmstat的常规用法：vmstat interval times即每隔interval秒采样一次，共采样times次，如果省略times,则一直采集数据，直到用户手动停止为止。
 简单举个例子：
 
+![Alt text](/images/BAB88CF1-8282-44E7-BBDC-EAC11914A7AF.png?raw=true "Optional Title")
 可以使用ctrl+c停止vmstat采集数据。
 
 第一行显示了系统自启动以来的平均值，第二行开始显示现在正在发生的情况，接下来的行会显示每5秒间隔发生了什么，每一列的含义在头部，如下所示：
@@ -32,7 +33,7 @@ vmstat的常规用法：vmstat interval times即每隔interval秒采样一次，
 ▲iostat--用于报告中央处理器统计信息
 iostat用于报告中央处理器（CPU）统计信息和整个系统、适配器、tty 设备、磁盘和 CD-ROM 的输入/输出统计信息，默认显示了与vmstat相同的cpu使用信息，使用以下命令显示扩展的设备统计：
 
-
+![Alt text](/images/FB09D2CE-FE77-4733-9ED6-4B86961DE060.png?raw=true "Optional Title")
 
 第一行显示的是自系统启动以来的平均值，然后显示增量的平均值，每个设备一行。
 常见linux的磁盘IO指标的缩写习惯：rq是request,r是read,w是write,qu是queue，sz是size,a是verage,tm是time,svc是service。
@@ -48,7 +49,7 @@ iostat用于报告中央处理器（CPU）统计信息和整个系统、适配�
 ▲dstat--系统监控工具
 dstat显示了cpu使用情况，磁盘io情况，网络发包情况和换页情况，输出是彩色的，可读性较强，相对于vmstat和iostat的输入更加详细且较为直观。在使用时，直接输入命令即可，当然也可以使用特定参数。
 如下：dstat –cdlmnpsy
-
+![Alt text](/images/EDD0CB0A-8B93-4AC3-9422-17F40A935CB7.png?raw=true "Optional Title")
 
 
 ▲iotop--LINUX进程实时监控工具
@@ -71,6 +72,8 @@ top命令的汇总区域显示了五个方面的系统性能信息：
 
 ▲htop
 htop 是Linux系统中的一个互动的进程查看器,一个文本模式的应用程序(在控制台或者X终端中),需要ncurses。
+
+![Alt text](/images/8F88F246-3504-4F58-9FA0-27253F861007.png?raw=true "Optional Title")
 
 Htop可让用户交互式操作，支持颜色主题，可横向或纵向滚动浏览进程列表，并支持鼠标操作。
 与top相比，htop有以下优点：
@@ -142,6 +145,7 @@ http://blog.csdn.net/trochiluses/article/details/10261339
 最后我们再来回顾下这些性能检测工具。
 
 一、 Linux observability tools | Linux 性能观测工具
+![Alt text](/images/111111.png?raw=true "Optional Title")
 
 ▪ 首先学习的Basic Tool有如下：
 uptime、top(htop)、mpstat、isstat、vmstat、free、ping、nicstat、dstat。
@@ -151,14 +155,15 @@ sar、netstat、pidstat、strace、tcpdump、blktrace、iotop、slabtop、sysctl
 更多参考：http://www.open-open.com/lib/view/open1434589043973.html，详细的命令使用方法可以参考man
 
 二、Linux benchmarking tools | Linux 性能测评工具
-
+![Alt text](/images/222222.png?raw=true "Optional Title")
 是一款性能测评工具，对于不同模块的性能测试可以使用相应的工具，想要深入了解，可以参考最下文的附件文档。
 
 三、Linux tuning tools | Linux 性能调优工具
-
+![Alt text](/images/333333.png?raw=true "Optional Title")
 是一款性能调优工具，主要是从linux内核源码层进行的调优，想要深入了解，可以参考下文附件文档。
 
 四、Linux observability sar | linux性能观测工具
+![Alt text](/images/444444.png?raw=true "Optional Title")
 
 sar（System Activity Reporter系统活动情况报告）是目前LINUX上最为全面的系统性能分析工具之一，可以从多方面对系统的活动进行报告，包括：文件的读写情况、系统调用的使用情况、磁盘I/O、CPU效率、内存使用状况、进程活动及IPC有关的活动等方面。
 
