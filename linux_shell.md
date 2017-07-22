@@ -1,8 +1,8 @@
-# 使用awk来统计数据的差异
+## 1. 使用awk来统计数据的差异
 echo $(($(bash get_kafka_offsets_standalone.sh | awk 'BEGIN {FS=","} {sum+=$2} END {print sum}')-$(bash get_vertica_offsets.sh | awk 'BEGIN {FS=","} {sum+=$2} END {print sum}')))
 
 
-# 实时监控日志状态、并做一些操作
+## 2. 实时监控日志状态、并做一些操作
 <pre>
 #!/bin/bash
 file="/sa_standalone/logs/stream_loader/stream_loader.log"
