@@ -3,6 +3,7 @@ echo $(($(bash get_kafka_offsets_standalone.sh | awk 'BEGIN {FS=","} {sum+=$2} E
 
 
 ## 2. 实时监控日志状态、并做一些操作
+(1)
 <pre>
 #!/bin/bash
 file="/sa_standalone/logs/stream_loader/stream_loader.log"
@@ -21,4 +22,8 @@ tail -fn0 $file | while read -r line; do
                 echo "all right" >> /sa_standalone/runtime/sl.log 2>&1
         fi
 done
+</pre>
+(1)
+<pre>
+tail -fn0 logfile | awk '/pattern/ { print | "command" }'
 </pre>
