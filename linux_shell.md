@@ -1,8 +1,9 @@
 ## 1. 使用awk来统计数据的差异
 echo $(($(bash get_kafka_offsets_standalone.sh | awk 'BEGIN {FS=","} {sum+=$2} END {print sum}')-$(bash get_vertica_offsets.sh | awk 'BEGIN {FS=","} {sum+=$2} END {print sum}')))
 
-
-## 2. 实时监控日志状态、并做一些操作
+## 2. 使用awk来统计网络连接状态数
+ss -tanp | awk 'BEGIN {FS=" "} {sum[$1]++} END {for (key in sum) print key, sum[key]}'
+## 3. 实时监控日志状态、并做一些操作
 1. shell 脚本实现
 <pre>
 #!/bin/bash
