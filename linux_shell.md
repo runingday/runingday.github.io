@@ -8,7 +8,8 @@ ss -tanp | awk 'BEGIN {FS=" "} {sum[$1]++} END {for (key in sum) print key, sum[
 <pre>
 #!/bin/bash
 file="/sa_standalone/logs/stream_loader/stream_loader.log"
-tail -fn0 $file | while read -r line; do
+#tail -F是针对文件名，如果是-f是对应的inode号
+tail -Fn0 $file | while read -r line; do
         echo "$line" | grep "Ros Too Many ERROR" >> /sa_standalone/runtime/sl.log 2>&1
         if [ $? = 0 ]
         then
