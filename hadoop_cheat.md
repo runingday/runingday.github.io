@@ -1,0 +1,9 @@
+## namenode format is danger command 
+Hadoop namenode -format
+
+    Hadoop namenode directory contains the fsimage and edit files which holds the basic information's about hadoop file system such as where is data available, which user created files like that
+
+    If you format the namenode then the above information's are deleted from namenode directory which is specified in the hdfs-site.xml as dfs.namenode.name.dir
+
+    But you still have the datas on the hadoop but not namenode meta data
+
