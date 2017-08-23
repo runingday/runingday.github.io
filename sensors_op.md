@@ -14,3 +14,26 @@ day   | event_bucket | #Rows | #Files | Size    | Bytes Cached | Cache Replicati
 | 17385 | 5            | -1    | 4      | 24.23KB | NOT CACHED   | NOT CACHED        | PARQUET | false             | hdfs://data01.yinke.sa:8020/sa/data/39/event/17385/5/.snapshot/20170807_235233-0-1502121153396  |
 | 17385 | 6            | -1    | 1      | 7.22KB  | NOT CACHED   | NOT CACHED        | PARQUET | false             | hdfs://data01.yinke.sa:8020/sa/data/39/event/17385/6/.snapshot/20170807_205331-0-1502110411007  |
 | 17385 | 7            | -1    | 1      | 6.71KB  | NOT CACHED   | NOT CACHED        | PARQUET | false             | hdfs://data01.yinke.sa:8020/sa/data/39/event/17385/7/.snapshot/20170807_205353-0-1502110433779  |
+
+mysql> select bucket_id, count(*) as event_count from event_define group by bucket_id;
+
+| bucket_id | event_count |
+|-----------|-------------|
+|      NULL |           7 |
+|         0 |         249 |
+|         1 |         244 |
+|         2 |         241 |
+|         3 |         239 |
+|         4 |         237 |
+|         5 |         234 |
+|         6 |         227 |
+|         7 |         219 |
+|         8 |         217 |
+|         9 |         215 |
+|        10 |          38 |
+|        11 |          19 |
+|        12 |          17 |
+|        13 |          15 |
+|        14 |           7 |
+
+16 rows in set (0.00 sec)
