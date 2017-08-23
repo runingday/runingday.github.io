@@ -1,5 +1,6 @@
 # impala 查看partitions 信息
 show partitions event_ros_p39;
+
 day   | event_bucket | #Rows | #Files | Size    | Bytes Cached | Cache Replication | Format  | Incremental stats | Location                                                                                        |
 |-------|--------------|------|--------|---------|--------------|-------------------|---------|-------------------|-------------------------------------------------------------------------------------------------|
 | 17380 | 3            | -1    | 3      | 15.93KB | NOT CACHED   | NOT CACHED        | PARQUET | false             | hdfs://data01.yinke.sa:8020/sa/data/39/event/17380/3/.snapshot/20170809_102906-0-1502245746601  |
