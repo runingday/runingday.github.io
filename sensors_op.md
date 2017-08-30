@@ -37,3 +37,13 @@ mysql> select bucket_id, count(*) as event_count from event_define group by buck
 |        14 |           7 |
 
 16 rows in set (0.00 sec)
+
+# scheduler 任务堆积
+job_record
+
+### 1. 停止scheduler模块，然后备份job_record表 
+~/sa/mysql/bin/mysqldump -uroot -p密码 -S ~/sa/mysql/mysqld.sock metadata job_record > /tmp/job_record.sql
+### 2. 然后清空job_record表
+truncate table job_record 
+### 3. 启动服务 scheduler
+
