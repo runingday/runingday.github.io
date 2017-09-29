@@ -8,10 +8,10 @@ wget -c --tries=1000 可以不断尝试多少次
 
 
 
+<pre>
 sysctl -w fs.file-max=10485760
 sysctl -w fs.nr_open=10485760
 
-<pre>
 [root@data01 ~]# sysctl -a | grep fs
 保证该配置值最大:
 fs.file-max = 10485760
