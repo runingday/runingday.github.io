@@ -47,3 +47,5 @@ job_record
 truncate table job_record 
 ### 3. 启动服务 scheduler
 
+mysql 查看数据类型 
+NUMBER(1), STRING(2), LIST(3), DATE(4), DATETIME(5), BOOL(6), UNKNOWN(-1);
