@@ -1,5 +1,5 @@
 # Excpression with take
-<code>
+<pre>
 
   Take advantage
   Take advice
@@ -22,4 +22,4 @@
   Take the temperature = take measurement of how hot is your body.
   Take it easy = to relax and not to use too much energy
   
-</code>
+</pre>
