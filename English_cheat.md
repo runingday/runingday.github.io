@@ -15,6 +15,7 @@
   Take your time
   Take off (plane) = when the aircraft leaves the ground and starts to fly.
   Take place = happen
+  Take the place of  (Substitute for) 替代品，代替
   Take medicine
   Take exams/tests
   Take part in an event
