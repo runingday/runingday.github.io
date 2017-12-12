@@ -2,6 +2,15 @@
 https://mozilla.github.io/server-side-tls/ssl-config-generator/
 
 <pre>
+upstream sensors_data_web {
+        server 192.168.1.181:8107;
+        server 192.168.1.182:8107;                                                                                                   server 192.168.1.183:8107;                                                                                                   ip_hash;
+}
+server {
+        listen 80;
+        server_name shence.ngmm365.com;
+        return 301 https://$host:4107$request_uri;
+}
 server {
 # 端口号，可自定义。集群版建议 8106，单机版建议 8006
         listen 4106;
