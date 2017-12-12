@@ -1,3 +1,6 @@
+# 参考文档
+https://mozilla.github.io/server-side-tls/ssl-config-generator/
+
 <pre>
 server {
 # 端口号，可自定义。集群版建议 8106，单机版建议 8006
