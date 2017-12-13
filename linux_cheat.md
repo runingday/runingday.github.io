@@ -16,9 +16,15 @@ sysctl -w fs.nr_open=10485760
 保证该配置值最大:
 fs.file-max = 10485760
 fs.nr_open = 10485760
+</pre>
+
+
+## 2. How do I put an already-running process under nohup?
+	
 <pre>
+Using the Job Control of bash to send the process into the background:
 
-
-
-
-
+    Ctrl+Z to stop (pause) the program and get back to the shell.
+    bg to run it in the background.
+    disown -h [job-spec] where [job-spec] is the job number (like %1 for the first running job; find about your number with the jobs command) so that the job isn't killed when the terminal
+</pre>
