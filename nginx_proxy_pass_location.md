@@ -27,3 +27,38 @@ rewrite /static_js/(.+)$ /$1 break;
 proxy_pass http://js.test.com; 
 } 
 </pre>
+
+# Nginx reverse proxy trailing slash
+I am having a node app which is running on port 3000. I am using nginx to reverse proxy. Now the application only works if there is a slash in the end.
+
+So this works: https://example.com/main/site/react/
+
+This does not: https://example.com/main/site/react
+
+Here is the configuration which I am using:
+<pre>
+location /main/site/react {
+    error_log /var/log/nginx/app.error.log;
+    rewrite ^/main/site/react/(?:|[\w\/]+)(\/static.*)$ $1 break;
+    rewrite ^/main/site/react/?(.*)$ /$1 break;
+    proxy_pass http://127.0.0.1:3000/;
+}
+</pre>
+After checking other related questions, adding following rewrite rule(after error_log) worked for me:
+
+<pre> rewrite ^(.*[^/])$ $1/ permanent; </pre>
+Above rule rendered my node application, but it failed with my static resources. I have some static resources rewrites which are not working.
+
+So this URL is not working: https://example.com/main/site/react/static/js/bundle.js. It always renders index HTML page.
+
+<pre>
+location /main/site/react {
+    rewrite ^/main/site/react$ https://$host/main/site/react/ permanent;
+    rewrite ^/main/site/react/(?:|[\w\/]+)(\/static.*)$ $1 break;
+    rewrite ^/main/site/react/?(.*)$ /$1 break;
+    proxy_pass http://127.0.0.1:3000;
+}
+</pre>
+
+
+
