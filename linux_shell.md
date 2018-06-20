@@ -31,3 +31,9 @@ done
 <pre>
 tail -fn0 logfile | awk '/pattern/ { print | "command" }'
 </pre>
+
+3. 正确匹配ip地址
+<pre>
+[sa_cluster@data01 nginx]$ echo '12.11.1.111' | egrep -o -w "([1-9][0-9]{0,2}[\.]){3}[1-9][0-9]{0,2}" --color
+12.11.1.111
+</pre>
