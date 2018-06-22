@@ -28,3 +28,10 @@ Using the Job Control of bash to send the process into the background:
     bg to run it in the background.
     disown -h [job-spec] where [job-spec] is the job number (like %1 for the first running job; find about your number with the jobs command) so that the job isn't killed when the terminal
 </pre>
+## 3. add sudo privilege to sa_cluster
+<pre>
+/etc/sudoers.d/sa_cluster
+Defaults:sa_cluster !requiretty
+Defaults env_keep += "TZ"
+sa_cluster ALL=(ALL) NOPASSWD:ALL
+</pre>
