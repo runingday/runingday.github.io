@@ -90,6 +90,7 @@ function modify_offset() {
         #if batch_loader progress is bigger than kafka progress, then you need modify the batch_loader progress
         if (( $bl_offset_value < $kafka_offset_value )); then
                 echo -e "\033[31mNow, starting to modify the offset of partition $p_id...\nupdate batch_loader_kafka_progress set  end_offset="$kafka_offset_value"  where process_partition = (select * from (select max(process_partition) from batch_loader_kafka_progress where kafka_partition_id = $p_id) as tmpCol) and kafka_partition_id=$p_id; \033[0m"
+                echo "update batch_loader_kafka_progress set  end_offset="$kafka_offset_value"  where process_partition = (select * from (select max(process_partition) from batch_loader_kafka_progress where kafka_partition_id = $p_id) as tmpCol) and kafka_partition_id=$p_id;" | sa_mysql 2>&1 >/tmp/modify_kafka_offset.log
         else
                 echo -e "\033[32mpartition $p_id batch_loader_offset_value is larger than kafka_offset_value, so no need to update \033[0m"
         fi
