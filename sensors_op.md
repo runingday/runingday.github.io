@@ -49,3 +49,147 @@ truncate table job_record
 
 mysql 查看数据类型 
 NUMBER(1), STRING(2), LIST(3), DATE(4), DATETIME(5), BOOL(6), UNKNOWN(-1);
+
+### 4. 修改kafka offset
+<pre>
+function zk_conf_kv_get() {
+    local m=$1 # module
+    local t=$2 # type (server/client)
+    local n=$3 # key
+    local conf_value=$(monitor_tools get_config -m $m -t $t -n $n 2>&1 | awk -F '=' '{print $2}' | head -n 1 | awk -F '"' '{print $2}')
+    echo $conf_value
+}
+BROKER_LIST=$(zk_conf_kv_get kafka client broker_list)
+TOPIC_NAME=$(zk_conf_kv_get kafka client topic_name)
+# get the oldest offset from kafka (--time -2 is the oldest offset)
+function kafka_get_end_offset() {
+        local p_id=$1  #partition_id
+        local kafka_offset_value=$(kafka-run-class kafka.tools.GetOffsetShell --topic ${TOPIC_NAME} --broker-list ${BROKER_LIST} --time -2 --partition $p_id 2>&1| grep event_topic:$p_id | awk -F ':' '{print $3}')
+        echo "partition $p_id kafka offset:" $kafka_offset_value >&2
+        echo $kafka_offset_value
+}
+#compare the offset between batch_loader and kafka
+function compare_offset() {
+        local p_id=$1 #partition_id
+        local bl_offset_value=$(echo "select end_offset from batch_loader_kafka_progress where process_partition in (select max(process_partition) from batch_loader_kafka_progress where kafka_partition_id = $p_id) and kafka_partition_id=$p_id;" | sa_mysql 2>&1 | grep [[:digit:]+])
+        echo "partition $p_id batch_loader offset:" $bl_offset_value >&2
+        local kafka_offset_value=$(kafka_get_end_offset $p_id)
+        #if batch_loader progress is bigger than kafka progress, then you need modify the batch_loader progress
+        if (( $bl_offset_value < $kafka_offset_value )); then
+                echo -e "\033[31mYou should modify the offset of this partition $p_id...\nupdate batch_loader_kafka_progress set  end_offset="$kafka_offset_value"  where process_partition = (select * from (select max(process_partition) from batch_loader_kafka_progress where kafka_partition_id = $p_id) as tmpCol) and
+kafka_partition_id=$p_id; \033[0m"
+        else
+                echo -e "\033[32mpartition $p_id batch_loader_offset_value is larger than kafka_offset_value, so no need to update \033[0m"
+        fi
+}
+function modify_offset() {
+        local p_id=$1 #partition_id
+        local bl_offset_value=$(echo "select end_offset from batch_loader_kafka_progress where process_partition in (select max(process_partition) from batch_loader_kafka_progress where kafka_partition_id = $p_id) and kafka_partition_id=$p_id;" | sa_mysql 2>&1 | grep [[:digit:]+])
+        echo "partition $p_id batch_loader offset:" $bl_offset_value >&2
+        local kafka_offset_value=$(kafka_get_end_offset $p_id)
+        #if batch_loader progress is bigger than kafka progress, then you need modify the batch_loader progress
+        if (( $bl_offset_value < $kafka_offset_value )); then
+                echo -e "\033[31mNow, starting to modify the offset of partition $p_id...\nupdate batch_loader_kafka_progress set  end_offset="$kafka_offset_value"  where process_partition = (select * from (select max(process_partition) from batch_loader_kafka_progress where kafka_partition_id = $p_id) as tmpCol) and kafka_partition_id=$p_id; \033[0m"
+        else
+                echo -e "\033[32mpartition $p_id batch_loader_offset_value is larger than kafka_offset_value, so no need to update \033[0m"
+        fi
+}
+#This function will control check/modify operation. 
+function magic_execute() {
+        config_file=$SENSORS_ANALYTICS_HOME/conf/sensors_analytics.property
+        num=`grep 'sensors_analytics.max_node_num' $config_file | awk -F'=' '{print $2}'`
+        func=$1
+        if [ $num == 1 ]
+        then
+            if [ $func == "check" ]
+            then
+                for i in {0..2}; do
+                    compare_offset $i
+                done
+            fi
+            if [ $func == "modify" ]
+            then
+                echo -e "\033[32m.......................................................................... \033[0m"
+                echo
+                echo -e "\033[31mPlease check whether the moduler extractor/batch_loader stopped first... \033[0m"
+                echo
+                echo -e "\033[33m.......................................................................... \033[0m"
+                read -ep "$prompt" modify_tag
+                if [ $modify_tag == "y" ] || [ $modify_tag == "yes" ]
+                then
+                        for i in {0..2};do
+                                modify_offset $i
+                        done
+                fi
+            fi
+        else
+            if [ $func == "check" ]
+            then
+                for i in {0..9}; do
+                    compare_offset $i
+                done
+            fi
+            if [ $func == "modify" ]
+            then
+                echo -e "\033[32m.......................................................................... \033[0m"
+                echo
+                echo -e "\033[31mPlease check whether the moduler extractor/batch_loader stopped first... \033[0m"
+                echo
+                echo -e "\033[33m.......................................................................... \033[0m"
+                read -ep "$prompt" modify_tag
+                if [ $modify_tag == "y" ] || [ $modify_tag == "yes" ]
+                then
+                        for i in {0..9};do
+                                modify_offset $i
+                        done
+                fi
+            fi
+        fi
+}
+function usage() {
+        echo -e "usage: $0 [OPTIONS]"
+        echo -e " -h --help  display help info ."
+        echo -e " -c --check check these offset OK"
+        echo -e " -m --modify execute modify operate"
+        exit 1
+}
+function main() {
+        user=`whoami`
+        if [ $user != "sa_cluster" ]
+        then
+                echo -e "\033[31mplease execute su - sa_cluster!\033[0m"
+                exit 1
+        fi
+        if [ $PARA_NUM -eq 0 ]; then
+                usage
+        fi
+
+        while [ $PARA_NUM -gt 0 ]; do
+        case $chose in
+        -h|--help)
+                usage
+                break
+                ;;
+        -c|--check)
+                f_tag="check"
+                magic_execute $f_tag
+                break
+                ;;
+        -m|--modify)
+                f_tag="modify"
+                magic_execute $f_tag
+                break
+                ;;
+        *)
+                usage
+                break
+                ;;
+        esac
+        done
+}
+
+let PARA_NUM=$(echo $#)
+chose=$1
+prompt=$(tput setaf 6; echo -n 'Are you sure to modify the offset -->>>(y/yes)'; tput sgr0; echo -n ':')  #read add color
+main
+</pre>
