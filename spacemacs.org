@@ -1,0 +1,9 @@
+* spacemacs 使用
+** 配置项
+1. export LC_CTYPE="zh_CN.utf8"  //在.zshrc文件中添加
+2. dotspacemacs-line-numbers t //显示行号
+
+## 快捷键
++ S - q - q 退出spacemacs
++ M-m f R 修改当前文件的文件名
++ S -f -e -R  修改.spacemacs之后不重启
