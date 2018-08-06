@@ -37,3 +37,22 @@ tail -fn0 logfile | awk '/pattern/ { print | "command" }'
 [sa_cluster@data01 nginx]$ echo '12.11.1.111' | egrep -o -w "([1-9][0-9]{0,2}[\.]){3}[1-9][0-9]{0,2}" --color
 12.11.1.111
 </pre>
+4. awk 使用split 
+<pre>
+[sa_cluster@sensors08-third ~]$ echo "I have an apple" | awk '{split($0,array," ")} END {print array[1]}'
+I
+[sa_cluster@sensors08-third ~]$ echo "I have an apple" | awk '{split($0,array," ")} END {print array[2]}'
+have
+[sa_cluster@sensors08-third ~]$ echo "I have an apple" | awk '{split($0,array," ")} END {print array[3]}'
+an
+[sa_cluster@sensors08-third ~]$ echo "I have an apple" | awk '{split($0,array," ")} END {print array[4]}'
+apple
+[sa_cluster@sensors08-third ~]$ echo "I have an apple" | awk '{split($0,array,"")} END {print array[3]}'
+h
+[sa_cluster@sensors08-third ~]$ echo "I have an apple" | awk '{split($0,array,"")} END {print array[5]}'
+</pre>
+
+5. awk 使用dict赋值
+<pre>
+sudo du -sh --exclude='/proc/*' /* | awk -F ' ' '/G/{my_dict[$2] = $1} END {for (key in my_dict) {print key ":" my_dict[key]}}'
+</pre>
