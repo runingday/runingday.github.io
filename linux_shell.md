@@ -57,17 +57,20 @@ h
 sudo du -sh --exclude='/proc/*' /* | awk -F ' ' '/G/{my_dict[$2] = $1} END {for (key in my_dict) {print key ":" my_dict[key]}}'
 </pre>
 6. Use awk to split line into array and use that array's values in calling shell
-Joe:Johnson:25
-Sue:Miller:27
+```
+        Joe:Johnson:25
+        Sue:Miller:27
 
-cat "${smryfile}" | while IFS=: read first last varx
-do
-    echo "first='$first' last='$last' varx='$varx'"
-    # do something
-done
+        cat "${smryfile}" | while IFS=: read first last varx
+        do
+            echo "first='$first' last='$last' varx='$varx'"
+            # do something
+        done
 
-while IFS=: read first last varx
-do
-    echo "first='$first' last='$last' varx='$varx'"
-    # do something
-done <"${smryfile}"
+        while IFS=: read first last varx
+        do
+            echo "first='$first' last='$last' varx='$varx'"
+            # do something
+        done <"${smryfile}"
+
+```
