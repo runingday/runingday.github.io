@@ -19,7 +19,7 @@ hadoop fs -du -s '/sa/data/4/event/*' | sort -r -k 1 -g | awk '{suffix="KMGT"; f
 ```
 * clodera manager api v12获取hdfs存储的数据目录列表
 ```
-[sa_cluster@sensors08-third ~]$  curl -u admin:密码 "http://sensors04-third.mars.lianjia.com.sa:7180/api/v13/clusters/cluster/services/hdfs/roles/hdfs-dn-1/config/"
+[sa_cluster@sensors08-third ~]$  curl -u admin:密码 "http://ip_address:7180/api/v13/clusters/cluster/services/hdfs/roles/hdfs-dn-1/config/"
   {
     "items" : [ {
       "name" : "datanode_log_dir",
