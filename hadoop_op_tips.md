@@ -17,3 +17,31 @@ hadoop fs -du -s '/sa/data/4/event/*' | sort -r -k 1 -g | awk '{suffix="KMGT"; f
   [hdfs@node1.all.sensors.dmp.com ~]$hdfs getconf -confKey hadoop.http.logs.enabled
   true
 ```
+* clodera manager api v12获取hdfs存储的数据目录列表
+```
+[sa_cluster@sensors08-third ~]$  curl -u admin:I9q_m "http://sensors04-third.mars.lianjia.com.sa:7180/api/v13/clusters/cluster/services/hdfs/roles/hdfs-dn-1/config/"
+  {
+    "items" : [ {
+      "name" : "datanode_log_dir",
+      "value" : "/data/sa_cluster/cloudera/logs/hadoop-hdfs"
+    }, {
+      "name" : "dfs_data_dir_list",
+      "value" : "/data1/sa_cluster/dfs/dn,/data2/sa_cluster/dfs/dn,/data3/sa_cluster/dfs/dn,/data4/sa_cluster/dfs/dn"
+    }, {
+      "name" : "dfs_datanode_data_dir_perm",
+      "value" : "755"
+    }, {
+      "name" : "dfs_datanode_du_reserved",
+      "value" : "787570543820"
+    }, {
+      "name" : "dfs_datanode_failed_volumes_tolerated",
+      "value" : "0"
+    }, {
+      "name" : "dfs_datanode_max_locked_memory",
+      "value" : "2113929216"
+    }, {
+      "name" : "max_log_size",
+      "value" : "10"
+    } ]
+  }
+```
