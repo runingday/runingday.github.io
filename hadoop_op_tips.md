@@ -45,3 +45,6 @@ hadoop fs -du -s '/sa/data/4/event/*' | sort -r -k 1 -g | awk '{suffix="KMGT"; f
     } ]
   }
 ```
+
+cloudera manager api 
+https://github.com/cloudera/cm_api/tree/master/python
