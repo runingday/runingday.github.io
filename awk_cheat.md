@@ -77,4 +77,35 @@ directory_digram "/"
 
 ```
 
+awk 加些类判断
+
+```
+[root@node1.all.sensors.dmp.com runtime]$du -sh * | awk '{print $1","$2}'| awk -F, '$2=="user.conf"{print $1};$2!="user.conf"{print $2}'
+partitions_to_move.json
+partitions_to_move.json.bak
+partitions_to_move_kafka.json
+rollback2.json
+rollback.json
+rollback_kafka.json
+sa.tgz
+sensors-analytics-update-1.6-1.7-406
+sensors-analytics-update-1.7-1.8-548
+topic.json
+update
+4.0K
+[root@node1.all.sensors.dmp.com runtime]$du -sh *
+4.0K    partitions_to_move.json
+4.0K    partitions_to_move.json.bak
+4.0K    partitions_to_move_kafka.json
+4.0K    rollback2.json
+4.0K    rollback.json
+4.0K    rollback_kafka.json
+1.2G    sa.tgz
+64K     sensors-analytics-update-1.6-1.7-406
+36K     sensors-analytics-update-1.7-1.8-548
+4.0K    topic.json
+529M    update
+4.0K    user.conf
+```
+
 ***注*** while存在一些陷阱，详情：https://www.cnblogs.com/f-ck-need-u/p/7431578.html 
