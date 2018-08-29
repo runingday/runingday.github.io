@@ -194,3 +194,11 @@ chose=$1
 prompt=$(tput setaf 6; echo -n 'Are you sure to modify the offset -->>>(y/yes)'; tput sgr0; echo -n ':')  #read add color
 main
 </pre>
+
+### 5. CDH kafka三副本，有台节点挂了需要更换节点
+将kafka新节点加上
+将kafka旧节点kafka停止，并删除角色
+kafka的broker_id改成要删除节点的kafka broker_id
+
+启动kafka，由于是三副本配置，新加的kafka节点会从其他两台节点同步数据. 
+
