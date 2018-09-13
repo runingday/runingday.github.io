@@ -52,3 +52,16 @@ create index index_id_2 on sensor_sku(sku_code);
 create index index_id_3 on sensor_order_sku_detail(order_id);
 create index index_id_3 on sensor_order(order_id);
 ```
+查看一张表上有哪些索引
+```
+MySQL [orders]> show index from sensor_order_sku_detail;
++-------------------------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table                   | Non_unique | Key_name   | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++-------------------------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| sensor_order_sku_detail |          0 | PRIMARY    |            1 | id          | A         |      301150 |     NULL | NULL   |      | BTREE      |         |               |
+| sensor_order_sku_detail |          1 | index_id   |            1 | sku_id      | A         |        5220 |     NULL | NULL   | YES  | BTREE      |         |               |
+| sensor_order_sku_detail |          1 | index_id_2 |            1 | sku_code    | A         |        6665 |     NULL | NULL   | YES  | BTREE      |         |               |
+| sensor_order_sku_detail |          1 | index_id_3 |            1 | order_id    | A         |      154320 |     NULL | NULL   | YES  | BTREE      |         |               |
++-------------------------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+4 rows in set (0.00 sec)
+```
