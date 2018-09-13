@@ -206,7 +206,7 @@ kafka的broker_id改成要删除节点的kafka broker_id
 ```
 
 upstream sensors_data_cdh {
-  server 172.30.200.201:7180;
+  server xxx.xxx.xxx.xxx:7180;
   ip_hash;
 }
 
