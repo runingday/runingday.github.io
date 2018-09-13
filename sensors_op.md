@@ -202,3 +202,29 @@ kafka的broker_id改成要删除节点的kafka broker_id
 
 启动kafka，由于是三副本配置，新加的kafka节点会从其他两台节点同步数据. 
 
+### 6. cdh 转发配置
+```
+
+upstream sensors_data_cdh {
+  server 172.30.200.201:7180;
+  ip_hash;
+}
+
+
+
+server {
+  listen 80;
+  server_name  xxxxx.cn;
+  access_log off;
+
+
+  location /  {
+    proxy_set_header HOST $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass http://sensors_data_cdh;
+  }
+}
+```
+
