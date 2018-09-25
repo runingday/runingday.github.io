@@ -145,71 +145,6 @@ function input_info() {
 	    	*)    # unknown option
 		CUSTOMER_NAME="$1"
 	    	POSITIONAL+=("$1") # save it in an array for later
-		#IFSbak=$IFS
-		#IFS=" "
-	#	list_user 
-	#	for ((i=0;i<${#user_list[@]};++i)); do
-	#		if [ "$customer_name" == "${user_list[$i]}" ];then
-	#			#show_screen "Found username: $customer_name" "info"
-	#			#query="select customer_name, ssh_ip, ssh_port, ssh_user, comments, is_jumpserver, create_time, create_user, modify_time, last_modify_user, access_time, last_access_user from customers where customer_name='$customer_name'"
-	#			#query="select customer_name,ssh_ip, ssh_port, ssh_user, ssh_key, comments, is_jumpserver, access_time, last_access_user from customers where customer_name='$customer_name'"
-        #			#while read -r customer_name ssh_ip ssh_port ssh_user ssh_key comments is_jumpserver access_time last_access_user
-        #			#do
-        #        		#	let tag++
-	#			#	#if [ $tag -gt 0 ];then
-	#			#	#	echo "ssh_key:$ssh_key"
-	#			#	#fi
-        #        		#	echo_function customer_name ${customer_name}
-        #        		#	echo_function ssh_ip ${ssh_ip}
-        #        		#	echo_function ssh_port ${ssh_port}
-        #        		#	echo_function ssh_user ${ssh_user}
-	#			#	echo_function ssh_key ${ssh_key}
-        #        		#	echo_function comments ${comments}
-        #        		#	echo_function is_jumpserver ${is_jumpserver}
-        #        		#	echo_function access_time ${access_time}
-        #        		#	echo_function last_access_user ${last_access_user}
-        #			#done < <(mysql -u"$MYSQL_USER" -h"$MYSQL_HOST" -P"$MYSQL_PORT" -p"$MYSQL_PASSWORD" -D "$MYSQL_DB" -N -e "$query")
-	#			#if [ $tag -eq "0" ];then
-        #        		#	show_screen "can't find the customer, please check again!!!" "err"
-        #        		#	exit $INPUT_CODE
-        #			#fi
-	#			#exit 0
-	#			ssh_key=$(get_mysql_field "ssh_key" "$customer_name")
-	#			is_jumpserver=$(get_mysql_field "is_jumpserver" "$customer_name")
-	#			ssh_user=$(get_mysql_field "ssh_user" "$customer_name")
-	#			ssh_port=$(get_mysql_field "ssh_port" "$customer_name")
-	#			ssh_ip=$(get_mysql_field "ssh_ip" "$customer_name")
-	#			if [ "$is_jumpserver" == "yes" ]
-	#			then
-	#				comments=$(get_mysql_field "comments" "$customer_name")
-	#				echo "comments:$comments"
-	#				show_screen "$comments" "info"
-	#			fi
-	#			if [ "$ssh_key" != "None" ]
-	#			then
-	#				salt=$(get_mysql_field "salt" "$customer_name")
-	#				lto_key=`echo $salt:$ssh_key:$customer_name | decrypt`
-	#				tmpfile=$(mktemp "/tmp/pem.XXXXXXXXXXXXXXXX") 
-	#				echo "$lto_key" > "$tmpfile"
-	#				ssh -o "StrictHostKeyChecking no" -o ConnectTimeout=21 -o ServerAliveInterval=120 -p "${ssh_port}" -i "${tmpfile}" "${ssh_user}"@"${ssh_ip}"
-	#				rm -f "$tmpfile"
-	#			else
-	#				ssh_password=$(get_mysql_field "ssh_password" "$customer_name")
-	#				echo "ssh_password:$ssh_password"
-	#				salt=$(get_mysql_field "salt" "$customer_name")
-	#				echo "salt:$salt"
-	#				read lto_password <<< `echo $salt:$ssh_password:$customer_name | decrypt`	
-	#				sshpass -p "${lto_password}" ssh -o "StrictHostKeyChecking no" -o ConnectTimeout=21 -o ServerAliveInterval=120 -p "${ssh_port}" "${ssh_user}@${ssh_ip}" && rm -f "${customer_name}".pem
-	#				
-	#				
-	#			fi
-	#			exit 0
-	#			
-	#		else
-	#			continue
-	#		fi
-	#	done
-	#	show_screen "Can't find customer $customer_name, please check again!!!" "err"
 		shift
 	    	;;
 	esac
@@ -388,10 +323,10 @@ EOPY
 
 #}
 
-MYSQL_HOST="10.9.85.144"
+MYSQL_HOST="10.xxx.xxx.xxx"
 MYSQL_PORT="3306"
 MYSQL_USER="devops"
-MYSQL_PASSWORD="rt4sniveeSgXV9UH0"
+MYSQL_PASSWORD="xxxxxx"
 MYSQL_DB="DevOps"
 WHITE="\033[0;37m"
 D_GREEN="\033[0;36m"
@@ -469,7 +404,6 @@ function list_user() {
 		#echo "line:$line"
     		user_list+=("$line")
 	done < <(mysql -u"$MYSQL_USER" -h"$MYSQL_HOST" -P "$MYSQL_PORT" -p$MYSQL_PASSWORD -D "$MYSQL_DB" -e "$query")
-	#done <<<`mysql -udevops -h10.9.85.144 -P 3306 -p -D DevOps -e "select customer_name from customers" -p"rt4sniveeSgXV9UH0"`
 }
 
 #function get_user_auth() {
