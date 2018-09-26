@@ -123,3 +123,21 @@ keys /etc/ntp/keys
 # next few lines are added by sensors analytics installer at 2017-06-08 10:18:34.680091
 # end
 </pre>
+
+
+
+## 无外网环境搭建ntp跟自己同步
+```
+
+  driftfile /var/lib/ntp/drift
+  restrict default kod nomodify notrap nopeer noquery
+  restrict -6 default kod nomodify notrap nopeer noquery
+  restrict 127.0.0.1 
+  restrict -6 ::1
+  server 127.127.1.0 iburst
+  server 127.127.1.0
+  fudge 127.127.1.0 stratum 8
+  includefile /etc/ntp/crypto/pw
+  keys /etc/ntp/keys
+
+```
