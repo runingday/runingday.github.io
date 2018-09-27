@@ -210,3 +210,22 @@ It can handle multiple single options like -vf filename in the typical Unix way,
 The disadvantage of getopts is that it can only handle short options (-h, not --help) without additional code.
 
 There is a getopts tutorial which explains what all of the syntax and variables mean. In bash, there is also help getopts, which might be informative.
+
+9. awk 赋值加判断
+```
+[sa_cluster@cloud ~]$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G  7.7G   13G  39% /
+devtmpfs         16G     0   16G   0% /dev
+tmpfs            16G     0   16G   0% /dev/shm
+tmpfs            16G   89M   16G   1% /run
+tmpfs            16G     0   16G   0% /sys/fs/cgroup
+/dev/vdb        200G   16G  185G   8% /data
+tmpfs           3.2G     0  3.2G   0% /run/user/1000
+tmpfs           3.2G     0  3.2G   0% /run/user/0
+cm_processes     16G  2.8M   16G   1% /run/cloudera-scm-agent/process
+[sa_cluster@cloud ~]$ df -h | tail -n +2 | awk '{sub('/\%/',"",$5);var=$5}{if((var-8)>=0) print var}'
+39
+8
+```
+
