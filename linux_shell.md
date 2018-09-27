@@ -212,7 +212,17 @@ The disadvantage of getopts is that it can only handle short options (-h, not --
 There is a getopts tutorial which explains what all of the syntax and variables mean. In bash, there is also help getopts, which might be informative.
 
 9. awk 赋值加判断
+
 ```
+[sa_cluster@cloud ~]$ cat names.txt
+1.      Aaron       Kili        M
+2.      Phenny      Amayo       M
+3.      Addyan      Barada      M
+[sa_cluster@cloud ~]$ awk '/A/ {firstname=$2;secondname=$3; print firstname,secondname}' names.txt
+Aaron Kili
+Phenny Amayo
+Addyan Barada
+
 [sa_cluster@cloud ~]$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/vda1        20G  7.7G   13G  39% /
