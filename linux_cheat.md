@@ -35,3 +35,32 @@ Defaults:sa_cluster !requiretty
 Defaults env_keep += "TZ"
 sa_cluster ALL=(ALL) NOPASSWD:ALL
 </pre>
+
+## 4. 针对SSD盘做读优化	
+Improving Read performance of Disks using 'blockdev'
+The Read performance of a Disk can be improved by increasing a parameter called "Read+Ahead" using 'blockdev' command. By default the Linux OS will read 128 KB of data in advance so that it is already in Memory cache before the program needs it. This value can be increased so as to get better Read Performance.
+
+Steps to check and increase the Read-Ahead value:
+
+To check the current 'blockdev' status of all block device:   # blockdev --report
+[root@linuxserver ~]# blockdev --report
+RO    RA   SSZ   BSZ   StartSec     Size    Device
+rw 16384   512  4096          0   14680064  /dev/sda
+rw 16384   512  1024         63     208782  /dev/sda1
+rw 16384   512   512     208845   10265535  /dev/sda2
+rw 16384   512  4096          0 2147483648  /dev/sdb
+rw 16384   512  4096          0   35651584  /dev/sdc
+rw 16384   512  2048         63   35648172  /dev/sdc1
+rw 16384   512  4096          0  104857600  /dev/sdd
+
+To check the 'Read-Ahead' value of an individual disk (let's take sda)
+# blockdev --getra /dev/sda
+(or)
+# cat /sys/block/sda/queue/read_ahead_kb
+
+To change the 'Read-Ahead' value to 8 MB (16384 times of 512 bytes blocks).
+# blockdev --setra 16384 /dev/sda
+# blockdev --setra 2048 /dev/sda  (1MB)
+
+To make it permanent upon system reboot, just add this command entry in /etc/rc.local.
+
