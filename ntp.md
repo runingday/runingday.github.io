@@ -27,7 +27,7 @@ restrict  10.0.0.0 mask 255.0.0.0 nomodify notrap
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 
-server 210.72.145.44 perfer   # 中国国家受时中心
+server 210.72.145.44 prefer   # 中国国家受时中心
 server 202.112.10.36             # 1.cn.pool.ntp.org
 server 59.124.196.83             # 0.asia.pool.ntp.org
 
