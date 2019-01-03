@@ -46,5 +46,9 @@ hadoop fs -du -s '/sa/data/4/event/*' | sort -r -k 1 -g | awk '{suffix="KMGT"; f
   }
 ```
 
+```
+curl -u admin:密码 http://xxxx:7180/api/v10/clusters/cluster/services/hdfs/roleConfigGroups
+```
+
 cloudera manager api 
 https://github.com/cloudera/cm_api/tree/master/python
