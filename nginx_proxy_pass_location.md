@@ -28,6 +28,23 @@ proxy_pass http://js.test.com;
 } 
 </pre>
 
+<pre>
+用户做转发配置想要实现
+1） http://xxx.xxx.xxx/test/senn/sa  --> http://xxx.xxx.xxx:1880/sa
+2） http://xxx.xxx.xxx/test/senn/debug  --> http://xxx.xxx.xxx:1880/debug
+3) http://xxx.xxx.xxx/test/senn/t/a  --> http://xxx.xxx.xxx:1880/t/a
+4) http://xxx.xxx.xxx/test/senn/t/A  --> http://xxx.xxx.xxx:1880/t/A
+location /test/senn/ {
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_pass http://xxx.xxx.com:1880/;
+      proxy_ignore_client_abort on;
+      proxy_set_header Host xxx.xxx.com;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "";
+  }
+
+</pre>
 # Nginx reverse proxy trailing slash
 I am having a node app which is running on port 3000. I am using nginx to reverse proxy. Now the application only works if there is a slash in the end.
 
